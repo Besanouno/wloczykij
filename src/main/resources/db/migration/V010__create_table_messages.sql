@@ -1,0 +1,18 @@
+CREATE TABLE tr.messages
+(
+  id BIGSERIAL NOT NULL,
+  event_id BIGINT NOT NULL,
+  user_id BIGINT NOT NULL,
+  content TEXT NOT NULL,
+  date TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+  CONSTRAINT messages_pkey PRIMARY KEY (id),
+  CONSTRAINT messages_event_id_fkey FOREIGN KEY (event_id)
+  REFERENCES tr.events (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT messages_user_id_fkey FOREIGN KEY (user_id)
+  REFERENCES tr.users (id) MATCH SIMPLE
+  ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS = FALSE
+);
